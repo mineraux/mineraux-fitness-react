@@ -1,3 +1,4 @@
+import NewProduct from 'pages/Diet/NewProduct'
 import MyDiet from 'pages/MyDiet'
 import MyProgram from 'pages/MyProgram'
 import { FunctionComponent } from 'react'
@@ -7,6 +8,7 @@ interface routeInterface {
   path: string
   name: string
   component: FunctionComponent
+  inHeader: boolean
 }
 
 interface routesInterface {
@@ -23,16 +25,25 @@ const config: configInterface = {
       path: '/',
       name: 'Home',
       component: Home,
+      inHeader: true
     },
     MyDiet: {
       path: '/my-diet',
       name: 'Ma diète',
       component: MyDiet,
+      inHeader: true
+    },
+    NewProduct: {
+      path: '/my-diet/new-product',
+      name: 'Nouveau produit',
+      component: NewProduct,
+      inHeader: false
     },
     MyProgram: {
       path: '/my-program',
       name: 'Mon programme',
       component: MyProgram,
+      inHeader: true
     },
   },
 }

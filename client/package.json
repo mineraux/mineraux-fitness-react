@@ -13,6 +13,7 @@
   "private": true,
   "dependencies": {
     "@apollo/react-hooks": "^3.0.1",
+    "@types/classnames": "^2.2.10",
     "@types/graphql": "^14.2.3",
     "@types/lodash": "^4.14.149",
     "@types/node": "12.7.2",
@@ -22,6 +23,7 @@
     "@types/react-router-dom": "^5.1.2",
     "apollo-boost": "^0.4.4",
     "apollo-cache-inmemory": "^1.6.3",
+    "classnames": "^2.2.6",
     "concurrently": "^5.0.0",
     "cross-env": "^5.2.0",
     "graphql": "^14.5.0",
@@ -60,7 +62,7 @@
     }
   },
   "devDependencies": {
-    "@babel/plugin-proposal-optional-chaining": "^7.7.5",
+    "@babel/plugin-proposal-optional-chaining": "^7.10.4",
     "@graphql-codegen/add": "^1.6.1",
     "@graphql-codegen/cli": "^1.6.1",
     "@graphql-codegen/fragment-matcher": "^1.6.1",
