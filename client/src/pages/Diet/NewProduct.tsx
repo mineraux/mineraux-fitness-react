@@ -18,6 +18,8 @@ const NewProduct: FunctionComponent = () => {
   const onSubmitNewProductForm = async (e: FormEvent) => {
     e.preventDefault()
 
+    // TODO: Input validation before submit form
+
     await createNewProduct({
       variables:{
         name: productName,

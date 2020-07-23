@@ -1,3 +1,4 @@
+import NewMeal from 'pages/Diet/NewMeal'
 import NewProduct from 'pages/Diet/NewProduct'
 import MyDiet from 'pages/MyDiet'
 import MyProgram from 'pages/MyProgram'
@@ -37,6 +38,12 @@ const config: configInterface = {
       path: '/my-diet/new-product',
       name: 'Nouveau produit',
       component: NewProduct,
+      inHeader: false
+    },
+    NewMeal: {
+      path: '/my-diet/new-meal',
+      name: 'Nouveau repas',
+      component: NewMeal,
       inHeader: false
     },
     MyProgram: {
