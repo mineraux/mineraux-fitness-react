@@ -1,0 +1,15 @@
+mutation createNewProduct($name: String!, $nutritives: [NutritiveInputType!]!, $calories: Int){
+  createProduct(productInput:{
+    name: $name,
+    nutritives: $nutritives,
+    calories: $calories,
+  }){
+    _id
+    name
+    nutritives {
+      nutritive
+      weight
+    }
+    calories
+  }
+}

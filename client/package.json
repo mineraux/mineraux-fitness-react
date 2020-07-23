@@ -1,0 +1,71 @@
+{
+  "name": "react-typescript-apollo-starter",
+  "description": "A simple starter to work with GraphQL, React, Typescript and GraphQL code-gen for TS",
+  "author": "Omar Jbara <omar.jbara2@gmail.com>",
+  "version": "0.1.0",
+  "repository": {
+    "url": "https://github.com/Liinkiing/react-typescript-apollo-starter",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/Liinkiing/react-typescript-apollo-starter/issues"
+  },
+  "private": true,
+  "dependencies": {
+    "@apollo/react-hooks": "^3.0.1",
+    "@types/graphql": "^14.2.3",
+    "@types/lodash": "^4.14.149",
+    "@types/node": "12.7.2",
+    "@types/react": "16.9.2",
+    "@types/react-dom": "16.9.0",
+    "@types/react-router": "^5.1.3",
+    "@types/react-router-dom": "^5.1.2",
+    "apollo-boost": "^0.4.4",
+    "apollo-cache-inmemory": "^1.6.3",
+    "concurrently": "^5.0.0",
+    "cross-env": "^5.2.0",
+    "graphql": "^14.5.0",
+    "lodash": "^4.17.15",
+    "react": "^16.9.0",
+    "react-apollo": "^3.0.1",
+    "react-dom": "npm:@hot-loader/react-dom",
+    "react-hot-loader": "^4.12.11",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.2.0",
+    "tailwindcss": "^1.5.1",
+    "ts-optchain": "^0.1.8",
+    "typescript": "^3.9.7"
+  },
+  "scripts": {
+    "gql-gen": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 gql-gen",
+    "prestart": "yarn gql-gen",
+    "start": "react-scripts start",
+    "dev": "concurrently  \"HTTPS=true react-scripts start\" \"yarn gql-gen --watch\" ",
+    "build": "react-scripts build",
+    "test": "jest",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "babelMacros": {
+    "styledComponents": {
+      "pure": true
+    }
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.7.5",
+    "@graphql-codegen/add": "^1.6.1",
+    "@graphql-codegen/cli": "^1.6.1",
+    "@graphql-codegen/fragment-matcher": "^1.6.1",
+    "@graphql-codegen/typescript": "^1.6.1",
+    "@graphql-codegen/typescript-operations": "^1.6.1",
+    "@graphql-codegen/typescript-react-apollo": "^1.6.1"
+  }
+}

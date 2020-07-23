@@ -1,0 +1,11 @@
+query ProductList {
+  products {
+    _id
+    name
+    nutritives {
+      nutritive
+      weight
+    }
+    calories
+  }
+}
