@@ -2,15 +2,11 @@ const { buildSchema } = require('graphql')
 
 module.exports = buildSchema(`
 
+  # Product
   enum NutritiveEnum {
     protein
     carbs
     lipid
-  }
-
-  input NutritiveInputType {
-    nutritive: NutritiveEnum!
-    weight: Int!
   }
 
   type Nutritive {
@@ -27,16 +23,45 @@ module.exports = buildSchema(`
 
   input ProductInput {
     name: String!
-    nutritives: [NutritiveInputType!]!
+    nutritives: [NutritiveInput!]!
     calories: Int
+  }
+
+  input NutritiveInput {
+    nutritive: NutritiveEnum!
+    weight: Int!
+  }
+
+  # Meal
+  type WeighedProduct {
+    weight: Int!
+    product: ID!
+  }
+
+  type Meal {
+    _id: ID!
+    name: String!
+    weighedProducts: [WeighedProduct!]!
+  }
+
+  input MealInput {
+    name: String
+    weighedProducts: [WeighedProductsInput!]!
+  }
+
+  input WeighedProductsInput {
+    weight: Int!
+    product: ID!
   }
 
   type RootQuery {
     products: [Product!]
+    meals: [Meal!]!
   }
 
   type RootMutation {
     createProduct(productInput: ProductInput): Product
+    createMeal(mealInput: MealInput): Meal
   }
 
   schema {

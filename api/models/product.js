@@ -6,10 +6,13 @@ const productSchema = new Schema({
     type: String,
     required: true
   },
-  nutritives: [{
-    nutritive: String,
-    weight: Number
-  }],
+  nutritives: {
+    type: [{
+      nutritive: String,
+      weight: Number
+    }],
+    required: true
+  },
   calories: {
     type: Number,
     required: true,

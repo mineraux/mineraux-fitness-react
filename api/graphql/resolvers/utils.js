@@ -1,6 +1,8 @@
 const DataLoader = require('dataloader')
 const Product = require('../../models/product')
+const Meal = require('../../models/product')
 
+// Product
 const productLoader = new DataLoader(productIds => {
   return products(productIds)
 })
@@ -48,5 +50,16 @@ const caloriesNutritivesWeight = {
   "lipid" : 9
 }
 
+// Meal
+const transformMeal = meal => {
+  return {
+    ...meal._doc,
+    _id: meal.id,
+    name: meal.name,
+    weighedProducts: meal.weighedProducts,
+  }
+}
+
 exports.transformProduct = transformProduct
+exports.transformMeal = transformMeal
 exports.caloriesNutritivesWeight = caloriesNutritivesWeight
