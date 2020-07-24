@@ -74,19 +74,19 @@ const NewProduct: FunctionComponent = () => {
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="macro">Macronutriments*</label>
             <div className="pl-2">
-              <label className="block text-gray-700 text-sm mb-1" htmlFor="calories">{NutritiveEnum.Protein}</label>
+              <label className="block text-gray-700 text-sm mb-1">{NutritiveEnum.Protein}</label>
               <Input type={text} name={NutritiveEnum.Protein} placeholder="300" className="mb-2" {...bindProtein} />
 
-              <label className="block text-gray-700 text-sm mb-1" htmlFor="calories">{NutritiveEnum.Carbs}</label>
+              <label className="block text-gray-700 text-sm mb-1">{NutritiveEnum.Carbs}</label>
               <Input type={text} name={NutritiveEnum.Carbs} placeholder="300" className="mb-2" {...bindCarbs} />
 
-              <label className="block text-gray-700 text-sm mb-1" htmlFor="calories">{NutritiveEnum.Lipid}</label>
+              <label className="block text-gray-700 text-sm mb-1">{NutritiveEnum.Lipid}</label>
               <Input type={text} name={NutritiveEnum.Lipid} placeholder="300" className="mb-2" {...bindLipid} />
             </div>
           </div>
 
           <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="calories">Calories</label>
+            <label className="block text-gray-700 text-sm font-bold mb-2">Calories</label>
             <Input type={text} name="calories" placeholder="300" {...bindCalories} />
             <p className="text-gray-600 text-xs italic">Les calories sont automatiquement calculées si tu ne spéicifies rien ici</p>
           </div>

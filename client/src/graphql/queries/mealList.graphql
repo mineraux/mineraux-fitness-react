@@ -1,0 +1,10 @@
+query MealList {
+  meals {
+    _id
+    name
+    weighedProducts {
+      weight
+      product
+    }
+  }
+}

@@ -1,5 +1,5 @@
 
-import React, { FunctionComponent } from 'react'
+import React, { ChangeEventHandler, FunctionComponent } from 'react'
 import Classnames from 'classnames'
 
 export enum InputType {
@@ -12,7 +12,7 @@ type InputProps = {
   name?: string
   placeholder?: string
   className?: string
-  onChange: any
+  onChange: ChangeEventHandler
 }
 
 const Input: FunctionComponent<InputProps> = ({type, name, placeholder, className, onChange}) => {

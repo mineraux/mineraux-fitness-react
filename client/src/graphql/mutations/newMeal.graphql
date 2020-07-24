@@ -1,0 +1,13 @@
+mutation createNewMeal($name: String!, $weighedProducts: [WeighedProductsInput!]!){
+  createMeal(mealInput: {
+    name: $name,
+    weighedProducts: $weighedProducts,
+  }){
+    _id
+    name
+    weighedProducts {
+      weight
+      product
+    }
+  }
+}
