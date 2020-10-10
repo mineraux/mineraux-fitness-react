@@ -88,7 +88,7 @@ const NewProduct: FunctionComponent = () => {
           <div className="mb-6">
             <label className="block text-gray-700 text-sm font-bold mb-2">Calories</label>
             <Input type={text} name="calories" placeholder="300" {...bindCalories} />
-            <p className="text-gray-600 text-xs italic">Les calories sont automatiquement calculées si tu ne spéicifies rien ici</p>
+            <p className="text-gray-600 text-xs italic">Les calories sont automatiquement calculées si tu ne spécifies rien ici</p>
           </div>
 
           <div className="flex items-center justify-between">

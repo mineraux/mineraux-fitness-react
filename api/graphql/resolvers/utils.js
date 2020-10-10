@@ -60,6 +60,16 @@ const transformMeal = meal => {
   }
 }
 
+const transformDatedMeal = datedMeal => {
+  return {
+    ...datedMeal._doc,
+    _id: datedMeal.id,
+    timestamp: datedMeal.timestamp,
+    meal: datedMeal.meal
+  }
+}
+
 exports.transformProduct = transformProduct
 exports.transformMeal = transformMeal
 exports.caloriesNutritivesWeight = caloriesNutritivesWeight
+exports.transformDatedMeal = transformDatedMeal

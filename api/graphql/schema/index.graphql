@@ -54,14 +54,34 @@ module.exports = buildSchema(`
     product: ID!
   }
 
+  # Calendar
+  type MealCalendar {
+    _id: ID!
+    datedMeals: [DatedMeal]
+  }
+
+  type DatedMeal {
+    _id: ID!
+    timestamp: String!
+    meal: ID!
+  }
+
+  input DatedMealInput {
+    timestamp: String!
+    meal: ID!
+  }
+
+  # Query and Mutation
   type RootQuery {
     products: [Product!]
     meals: [Meal!]!
+    datedMeals: [DatedMeal!]!
   }
 
   type RootMutation {
     createProduct(productInput: ProductInput): Product
     createMeal(mealInput: MealInput): Meal
+    createDatedMeal(datedMealInput: DatedMealInput): DatedMeal
   }
 
   schema {

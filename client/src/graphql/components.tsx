@@ -17,11 +17,29 @@ export type Scalars = {
   Float: number,
 };
 
+export type DatedMeal = {
+  readonly __typename?: 'DatedMeal',
+  readonly _id: Scalars['ID'],
+  readonly timestamp: Scalars['String'],
+  readonly meal: Scalars['ID'],
+};
+
+export type DatedMealInput = {
+  readonly timestamp: Scalars['String'],
+  readonly meal: Scalars['ID'],
+};
+
 export type Meal = {
   readonly __typename?: 'Meal',
   readonly _id: Scalars['ID'],
   readonly name: Scalars['String'],
   readonly weighedProducts: ReadonlyArray<WeighedProduct>,
+};
+
+export type MealCalendar = {
+  readonly __typename?: 'MealCalendar',
+  readonly _id: Scalars['ID'],
+  readonly datedMeals: Maybe<ReadonlyArray<Maybe<DatedMeal>>>,
 };
 
 export type MealInput = {
@@ -64,6 +82,7 @@ export type RootMutation = {
   readonly __typename?: 'RootMutation',
   readonly createProduct: Maybe<Product>,
   readonly createMeal: Maybe<Meal>,
+  readonly createDatedMeal: Maybe<DatedMeal>,
 };
 
 
@@ -76,10 +95,16 @@ export type RootMutationCreateMealArgs = {
   mealInput: Maybe<MealInput>
 };
 
+
+export type RootMutationCreateDatedMealArgs = {
+  datedMealInput: Maybe<DatedMealInput>
+};
+
 export type RootQuery = {
   readonly __typename?: 'RootQuery',
   readonly products: Maybe<ReadonlyArray<Product>>,
   readonly meals: ReadonlyArray<Meal>,
+  readonly datedMeals: ReadonlyArray<DatedMeal>,
 };
 
 export type WeighedProduct = {
