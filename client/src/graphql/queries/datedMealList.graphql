@@ -1,0 +1,7 @@
+query DatedMeals {
+  datedMeals {
+    _id
+    timestamp
+    meal
+  }
+}

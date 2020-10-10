@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import moment from 'moment'
 import Classnames from 'classnames'
 import '../../assets/styles/calendar.css'
+import { useDatedMealsQuery } from 'graphql/components';
 
 /**
  * NOTE Calendar:
@@ -14,6 +15,7 @@ import '../../assets/styles/calendar.css'
  */
 
 const Calendar: FunctionComponent = () => {
+  const { data, loading, error } = useDatedMealsQuery()
   const currentMonth = new Date().getMonth()
   const currentYear = new Date().getFullYear()
   const currentMonthName = moment.months(currentMonth)
@@ -34,36 +36,52 @@ const Calendar: FunctionComponent = () => {
     console.log(day)
   }
 
-  return (
-    <div>
-      <span className="block text-gray-700 text-sm mb-1">
-        Current month : {currentMonthName}
-      </span>
+  if (data?.datedMeals) {
+    return (
+      <div>
+        <span className="block text-gray-700 text-sm mb-1">
+          Current month : {currentMonthName}
+        </span>
 
-      <div className="calendar__day-list flex flex-col max-w-sm overflow-y-scroll my-10">
-        {
-          dateInMonth.map((day, index) => {
+        <div className="calendar__day-list flex flex-col max-w-sm overflow-y-scroll my-10">
+          {
+            dateInMonth.map((day, index) => {
+              const dayMeals = data.datedMeals.filter(datedMeal => moment(datedMeal.timestamp).isSame(day.toISOString(), 'day'))
 
-            return (
-              <div key={index} className={Classnames(index % 2 === 0 ? 'bg-gray-100': '', 'flex py-5 px-5 rounded-lg cursor-pointer')}
-                onClick={() => onClickDay(day)}>
-                <div className="flex justify-center w-20">
-                  <div className="flex flex-col text-center">
-                    <span className="text-gray-600 text-xs">{day.format('ddd')}</span>
-                    <span className="text-gray-700 text-2xl font-bold">{day.format('DD')}</span>
+              if (dayMeals.length) {
+                console.log(dayMeals)
+              }
+
+
+              return (
+                <div key={index} className={Classnames(index % 2 === 0 ? 'bg-gray-100': '', 'flex py-5 px-5 rounded-lg cursor-pointer')}
+                  onClick={() => onClickDay(day)}>
+                  <div className="flex justify-center w-20">
+                    <div className="flex flex-col text-center">
+                      <span className="text-gray-600 text-xs">{day.format('ddd')}</span>
+                      <span className="text-gray-700 text-2xl font-bold">{day.format('DD')}</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col pl-6 border-l border-gray-400 justify-center">
+                    <span>{dayMeals.length} meal{dayMeals.length > 1 ? 's' :''}</span>
+                    <span className="text-gray-600 text-xs">Total calories : 2500</span>
                   </div>
                 </div>
-                <div className="flex flex-col pl-6 border-l border-gray-400 justify-center">
-                  <span>3 meal</span>
-                  <span className="text-gray-600 text-xs">Total calories : 2500</span>
-                </div>
-              </div>
-            )
-          })
-        }
+              )
+            })
+          }
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
+
+  if (loading) {
+    return (
+      <span>Loading ...</span>
+    )
+  }
+
+  return null
 }
 
 export default Calendar

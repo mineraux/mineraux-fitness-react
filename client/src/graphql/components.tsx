@@ -155,6 +155,17 @@ export type CreateNewProductMutation = (
   )> }
 );
 
+export type DatedMealsQueryVariables = {};
+
+
+export type DatedMealsQuery = (
+  { readonly __typename?: 'RootQuery' }
+  & { readonly datedMeals: ReadonlyArray<(
+    { readonly __typename?: 'DatedMeal' }
+    & Pick<DatedMeal, '_id' | 'timestamp' | 'meal'>
+  )> }
+);
+
 export type MealListQueryVariables = {};
 
 
@@ -298,6 +309,57 @@ export function useCreateNewProductMutation(baseOptions?: ApolloReactHooks.Mutat
 export type CreateNewProductMutationHookResult = ReturnType<typeof useCreateNewProductMutation>;
 export type CreateNewProductMutationResult = ApolloReactCommon.MutationResult<CreateNewProductMutation>;
 export type CreateNewProductMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateNewProductMutation, CreateNewProductMutationVariables>;
+export const DatedMealsDocument = gql`
+    query DatedMeals {
+  datedMeals {
+    _id
+    timestamp
+    meal
+  }
+}
+    `;
+export type DatedMealsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<DatedMealsQuery, DatedMealsQueryVariables>, 'query'>;
+
+    export const DatedMealsComponent = (props: DatedMealsComponentProps) => (
+      <ApolloReactComponents.Query<DatedMealsQuery, DatedMealsQueryVariables> query={DatedMealsDocument} {...props} />
+    );
+    
+export type DatedMealsProps<TChildProps = {}> = ApolloReactHoc.DataProps<DatedMealsQuery, DatedMealsQueryVariables> & TChildProps;
+export function withDatedMeals<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  DatedMealsQuery,
+  DatedMealsQueryVariables,
+  DatedMealsProps<TChildProps>>) {
+    return ApolloReactHoc.withQuery<TProps, DatedMealsQuery, DatedMealsQueryVariables, DatedMealsProps<TChildProps>>(DatedMealsDocument, {
+      alias: 'datedMeals',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useDatedMealsQuery__
+ *
+ * To run a query within a React component, call `useDatedMealsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDatedMealsQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDatedMealsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useDatedMealsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<DatedMealsQuery, DatedMealsQueryVariables>) {
+        return ApolloReactHooks.useQuery<DatedMealsQuery, DatedMealsQueryVariables>(DatedMealsDocument, baseOptions);
+      }
+export function useDatedMealsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<DatedMealsQuery, DatedMealsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<DatedMealsQuery, DatedMealsQueryVariables>(DatedMealsDocument, baseOptions);
+        }
+export type DatedMealsQueryHookResult = ReturnType<typeof useDatedMealsQuery>;
+export type DatedMealsLazyQueryHookResult = ReturnType<typeof useDatedMealsLazyQuery>;
+export type DatedMealsQueryResult = ApolloReactCommon.QueryResult<DatedMealsQuery, DatedMealsQueryVariables>;
 export const MealListDocument = gql`
     query MealList {
   meals {
