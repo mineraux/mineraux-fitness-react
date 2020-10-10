@@ -12,6 +12,14 @@ module.exports = {
       throw err
     }
   },
+  singleMeal: async args => {
+    try {
+      const meal = await Meal.findById(args.mealId)
+      return transformMeal(meal)
+    } catch (err) {
+      throw err
+    }
+  },
   createMeal: async (args) => {
     const meal = new Meal({
       name: args.mealInput.name,
