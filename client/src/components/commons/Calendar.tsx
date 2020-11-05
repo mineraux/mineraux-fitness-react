@@ -1,8 +1,9 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import moment from 'moment'
 import Classnames from 'classnames'
 import '../../assets/styles/calendar.css'
-import { useDatedMealsQuery } from 'graphql/components';
+import { useDatedMealsQuery, useSingleMealLazyQuery, useSingleMealQuery } from 'graphql/components';
+import SingleMeal from './SingleMeal';
 
 /**
  * NOTE Calendar:
@@ -16,6 +17,10 @@ import { useDatedMealsQuery } from 'graphql/components';
 
 const Calendar: FunctionComponent = () => {
   const { data, loading, error } = useDatedMealsQuery()
+  const [count, setCount] = useState([<></>]);
+  const  [loadingSingleMeal, { called }] = useSingleMealLazyQuery()
+  // const callQuery = useSingleMealLazyQuery()
+
   const currentMonth = new Date().getMonth()
   const currentYear = new Date().getFullYear()
   const currentMonthName = moment.months(currentMonth)
@@ -32,9 +37,27 @@ const Calendar: FunctionComponent = () => {
     return moment().year(currentYear).month(currentMonth).date(index)
   })
 
-  const onClickDay = (day: moment.Moment) => {
-    console.log(day)
+  const onClickDay = (dayMeals: any[]) => {
+    // console.log("dayMeals = ", dayMeals)
+    // const  [loadingSingleMeal, { called, data, loading }] = useSingleMealLazyQuery()
+    // loadingSingleMeal({variables:{mealId: "5f1b501d66ca9791a04dde82"})
+
+    const yolo = dayMeals.map(meal => {
+      return <SingleMeal meal={meal} />
+    })
+
+    setCount(yolo)
+
   }
+
+  // return (
+  //   <>
+  //     <p>{count}</p>
+  //     <button onClick={() => loadingSingleMeal({variables:{mealId: "5f1b501d66ca9791a04dde82"}})}>
+  //       Cliquez ici
+  //     </button>
+  //   </>
+  // )
 
   if (data?.datedMeals) {
     return (
@@ -48,14 +71,9 @@ const Calendar: FunctionComponent = () => {
             dateInMonth.map((day, index) => {
               const dayMeals = data.datedMeals.filter(datedMeal => moment(datedMeal.timestamp).isSame(day.toISOString(), 'day'))
 
-              if (dayMeals.length) {
-                console.log(dayMeals)
-              }
-
-
               return (
                 <div key={index} className={Classnames(index % 2 === 0 ? 'bg-gray-100': '', 'flex py-5 px-5 rounded-lg cursor-pointer')}
-                  onClick={() => onClickDay(day)}>
+                  onClick={() => {onClickDay(dayMeals)}}>
                   <div className="flex justify-center w-20">
                     <div className="flex flex-col text-center">
                       <span className="text-gray-600 text-xs">{day.format('ddd')}</span>
@@ -71,6 +89,7 @@ const Calendar: FunctionComponent = () => {
             })
           }
         </div>
+        {count}
       </div>
     )
   }

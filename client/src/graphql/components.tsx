@@ -105,6 +105,12 @@ export type RootQuery = {
   readonly products: Maybe<ReadonlyArray<Product>>,
   readonly meals: ReadonlyArray<Meal>,
   readonly datedMeals: ReadonlyArray<DatedMeal>,
+  readonly singleMeal: Meal,
+};
+
+
+export type RootQuerySingleMealArgs = {
+  mealId: Scalars['ID']
 };
 
 export type WeighedProduct = {
@@ -194,6 +200,23 @@ export type ProductListQuery = (
       & Pick<Nutritive, 'nutritive' | 'weight'>
     )> }
   )>> }
+);
+
+export type SingleMealQueryVariables = {
+  mealId: Scalars['ID']
+};
+
+
+export type SingleMealQuery = (
+  { readonly __typename?: 'RootQuery' }
+  & { readonly singleMeal: (
+    { readonly __typename?: 'Meal' }
+    & Pick<Meal, '_id' | 'name'>
+    & { readonly weighedProducts: ReadonlyArray<(
+      { readonly __typename?: 'WeighedProduct' }
+      & Pick<WeighedProduct, 'weight' | 'product'>
+    )> }
+  ) }
 );
 
 
@@ -469,3 +492,58 @@ export function useProductListLazyQuery(baseOptions?: ApolloReactHooks.LazyQuery
 export type ProductListQueryHookResult = ReturnType<typeof useProductListQuery>;
 export type ProductListLazyQueryHookResult = ReturnType<typeof useProductListLazyQuery>;
 export type ProductListQueryResult = ApolloReactCommon.QueryResult<ProductListQuery, ProductListQueryVariables>;
+export const SingleMealDocument = gql`
+    query SingleMeal($mealId: ID!) {
+  singleMeal(mealId: $mealId) {
+    _id
+    name
+    weighedProducts {
+      weight
+      product
+    }
+  }
+}
+    `;
+export type SingleMealComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<SingleMealQuery, SingleMealQueryVariables>, 'query'> & ({ variables: SingleMealQueryVariables; skip?: boolean; } | { skip: boolean; });
+
+    export const SingleMealComponent = (props: SingleMealComponentProps) => (
+      <ApolloReactComponents.Query<SingleMealQuery, SingleMealQueryVariables> query={SingleMealDocument} {...props} />
+    );
+    
+export type SingleMealProps<TChildProps = {}> = ApolloReactHoc.DataProps<SingleMealQuery, SingleMealQueryVariables> & TChildProps;
+export function withSingleMeal<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  SingleMealQuery,
+  SingleMealQueryVariables,
+  SingleMealProps<TChildProps>>) {
+    return ApolloReactHoc.withQuery<TProps, SingleMealQuery, SingleMealQueryVariables, SingleMealProps<TChildProps>>(SingleMealDocument, {
+      alias: 'singleMeal',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useSingleMealQuery__
+ *
+ * To run a query within a React component, call `useSingleMealQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSingleMealQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSingleMealQuery({
+ *   variables: {
+ *      mealId: // value for 'mealId'
+ *   },
+ * });
+ */
+export function useSingleMealQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<SingleMealQuery, SingleMealQueryVariables>) {
+        return ApolloReactHooks.useQuery<SingleMealQuery, SingleMealQueryVariables>(SingleMealDocument, baseOptions);
+      }
+export function useSingleMealLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<SingleMealQuery, SingleMealQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<SingleMealQuery, SingleMealQueryVariables>(SingleMealDocument, baseOptions);
+        }
+export type SingleMealQueryHookResult = ReturnType<typeof useSingleMealQuery>;
+export type SingleMealLazyQueryHookResult = ReturnType<typeof useSingleMealLazyQuery>;
+export type SingleMealQueryResult = ApolloReactCommon.QueryResult<SingleMealQuery, SingleMealQueryVariables>;

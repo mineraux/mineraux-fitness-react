@@ -1,0 +1,10 @@
+query SingleMeal($mealId: ID!) {
+  singleMeal(mealId: $mealId) {
+    _id
+    name
+    weighedProducts {
+      weight
+      product
+    }
+  }
+}

@@ -74,9 +74,9 @@ module.exports = buildSchema(`
   # Query and Mutation
   type RootQuery {
     products: [Product!]
-    meals: [Meal!]
-    datedMeals: [DatedMeal!]
-    singleMeal(mealId: ID!): Meal
+    meals: [Meal!]!
+    datedMeals: [DatedMeal!]!
+    singleMeal(mealId: ID!): Meal!
   }
 
   type RootMutation {
